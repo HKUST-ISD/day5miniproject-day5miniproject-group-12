@@ -58,14 +58,14 @@ void loop() {
        // Serial Monitor show Safe
         Serial.println("Status: SAFE");
        // buzzer no sound
-        noTONE(BUZZER_PIN);
+        noTone(BUZZER_PIN);
   } else if (humi >= 30) {
        // servo motor stop 
         Servo.write(95);
        // Serial Monitor show Caution
         Serial.println("Status: Caution");
        // buzzer continuously alarm
-        TONE(BUZZER_PIN, 1000);
+        Tone(BUZZER_PIN, 1000);
       // Measure distance to heat source
       float distance = sonar.ping_cm();
       if (distance == 0) distance = MAX_DISTANCE;  // handle out-of-range
@@ -80,10 +80,10 @@ void loop() {
        // Serial Monitor show Dangerous
         Serial.println("Status: Dangerous");
        // buzzer beep
-        TONE(BUZZER_PIN, 1000);
-        DELAY(300);
-        NOTONE(BUZZER_PIN);
-        DELAY(300);
+        Tone(BUZZER_PIN, 1000);
+        delay(300);
+        noTone(BUZZER_PIN);
+        delay(300);
   }
   
 
