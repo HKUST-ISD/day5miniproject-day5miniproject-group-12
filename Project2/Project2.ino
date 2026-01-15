@@ -53,28 +53,33 @@ void loop() {
   } else if (temp <= 30) {
       
         // servo motor stop 
-        ???
+        servo.write(95);
        // Serial Monitor show Safe
-        ???
+        Serial.println("Status: SAFE");
        // buzzer no sound
-        ???
+        noTONE(BUZZER_PIN);
   } else if (humi >= 30) {
        // servo motor stop 
-        ???
+        servo.write(95);
        // Serial Monitor show Caution
-        ???
+        Serial.println("Status: Caution");
        // buzzer continuously alarm
-        ??? 
+        TONE(BUZZER_PIN, 1000);
        // report heat source distance from Ultrasonic sensor
-        ???
+        Serial.print("Heat source distance: ");
+        Serial.print(distance);
+        Serial.println(" cm");
     } 
     else if (humi < 30)  {
       // servo motor run
-        ???
+        servo.write(70);
        // Serial Monitor show Dangerous
-        ???
+        Serial.println("Status: Dangerous");
        // buzzer beep
-        ???
+        TONE(BUZZER_PIN, 1000);
+        DELAY(300);
+        NOTONE(BUZZER_PIN);
+        DELAY(300);
   }
   
 
