@@ -5,7 +5,7 @@
 #include <ESP32Servo.h>
 
 // define DHT11 sensor pin
-#define DHT_PIN   ?
+
 
 #define DHT_TYPE DHT11
 DHT dht11(DHT_PIN, DHT_TYPE);
@@ -17,24 +17,25 @@ DHT dht11(DHT_PIN, DHT_TYPE);
 NewPing sonar(TRIG_PIN, ECHO_PIN, MAX_DISTANCE); 
 
 //define pins
-#define LED_PIN ?
-#define DHT_PIN   ?
-#define TRIG_PIN ?        
-#define ECHO_PIN  ?       
-#define BUZZER_PIN ?     
-#define Servo_PIN ? 
+#define LED_PIN 1
+#define DHT_PIN   4
+#define TRIG_PIN 5        
+#define ECHO_PIN  6       
+#define BUZZER_PIN 35     
+#define Servo_PIN 16
 
 
 
 void setup() {
   // Initialize Serial Monitor 
-  Serial.begin(?);    
+  Serial.begin(115200);    
   // initialize the DHT11 sensor
   dht11.begin();
   //attach servo pin
-  servo.attach(?);
+  Servo.attach(Servo_PIN);
   // config the pin mode of each pin
-  ???
+  pinMode(LED_PIN, OUTPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
   //
 }
 
@@ -53,14 +54,14 @@ void loop() {
   } else if (temp <= 30) {
       
         // servo motor stop 
-        servo.write(95);
+        Servo.write(95);
        // Serial Monitor show Safe
         Serial.println("Status: SAFE");
        // buzzer no sound
         noTONE(BUZZER_PIN);
   } else if (humi >= 30) {
        // servo motor stop 
-        servo.write(95);
+        Servo.write(95);
        // Serial Monitor show Caution
         Serial.println("Status: Caution");
        // buzzer continuously alarm
@@ -75,7 +76,7 @@ void loop() {
     } 
     else if (humi < 30)  {
       // servo motor run
-        servo.write(70);
+        Servo.write(70);
        // Serial Monitor show Dangerous
         Serial.println("Status: Dangerous");
        // buzzer beep
