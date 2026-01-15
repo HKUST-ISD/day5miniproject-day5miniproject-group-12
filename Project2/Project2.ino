@@ -65,10 +65,13 @@ void loop() {
         Serial.println("Status: Caution");
        // buzzer continuously alarm
         TONE(BUZZER_PIN, 1000);
-       // report heat source distance from Ultrasonic sensor
-        Serial.print("Heat source distance: ");
-        Serial.print(distance);
-        Serial.println(" cm");
+      // Measure distance to heat source
+      float distance = sonar.ping_cm();
+      if (distance == 0) distance = MAX_DISTANCE;  // handle out-of-range
+
+      Serial.print("Heat source distance: ");
+      Serial.print(distance);
+      Serial.println(" cm");
     } 
     else if (humi < 30)  {
       // servo motor run
