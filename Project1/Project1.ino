@@ -4,14 +4,14 @@
 #include "NewPing.h"
 
 // define ultrasonic pins
-#define TRIG_PIN   ?       
-#define ECHO_PIN    ?     
+#define TRIG_PIN   5       
+#define ECHO_PIN    4     
 
-// define buzzer pin ？
-#define BUZZER_PIN  ？   
+// define buzzer pin 
+#define BUZZER_PIN  35   
 
 //Define Built-in LED pin
-#define LED_PIN ？      
+#define LED_PIN 1  
 
 // Maximum distance we want to ping for (in centimeters).
 #define MAX_DISTANCE 400
@@ -70,9 +70,11 @@ int noteDurations_low[] = {
 void setup() {
 
   // initialize serial monitor
-     ???
- // set pins mode
-    ???
+  Serial.begin(115200);
+  delay(200);  // Give time for Serial Monitor to connect
+  // set pins mode
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
  
   
 }
@@ -83,18 +85,18 @@ void loop() {
   
       if (distance > 10 ) {
         // turn on built in LED
-        ???
+        digitalWrite(LED_PIN, HIGH)
       } else if (distance <= 10 && distance >= 5) {
         // turn off built in LED
-        ???
+        digitalWrite(LED_PIN, LOW)
         // play high tone Jingle-Bells Iterate over the notes of the melody_high:
-        ???
+        tone(BUZZER_PIN, melody_HIGH[i], noteDuration);
       } else if (distance <5 ) {
         // turn off built in LED
-        ???
+        digitalWrite(LED_PIN, LOW)
         // play low tone Jingle-Bells Iterate over the notes of the melody_low
-        ???
+        tone(BUZZER_PIN, melody_LOW[i], noteDuration);
    
 } 
-  delay(?);
+  delay(100);
 }
